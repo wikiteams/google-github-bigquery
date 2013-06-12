@@ -1,0 +1,6 @@
+SELECT MAX(repository_size) as size, repository_url
+ FROM [githubarchive:github.timeline] 
+ WHERE (created_at CONTAINS "2013-06-10") 
+ GROUP BY repository_url
+ ORDER BY size 
+ DESC LIMIT 200
