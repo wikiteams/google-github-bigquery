@@ -1,0 +1,6 @@
+SELECT MAX(repository_size) as size, repository_url, repository_name as name, repository_owner as owner, repository_forks as forks, repository_description as description
+ FROM [githubarchive:github.timeline] 
+ WHERE (created_at CONTAINS "2013-06-12") 
+ GROUP BY repository_url, name, owner, forks, description
+ ORDER BY size 
+ DESC LIMIT 10000
