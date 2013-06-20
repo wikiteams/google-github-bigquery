@@ -1,0 +1,34 @@
+/* top 100 repos for any language by number of pushes */
+SELECT repository_name, count(repository_name) as pushes, repository_description, repository_url, repository_language
+FROM [githubarchive:github.timeline]
+WHERE type="PushEvent"
+/* AND repository_language="Ruby" */
+AND PARSE_UTC_USEC(created_at) >= PARSE_UTC_USEC('2012-04-01 00:00:00')
+GROUP BY repository_name, repository_description, repository_url, repository_language
+ORDER BY pushes DESC
+LIMIT 100
+
+
+=
+
+
+/* top 6000 repos for any language by number of pushes */
+SELECT repository_name, count(repository_name) as pushes, repository_description, repository_url, repository_language
+FROM [githubarchive:github.timeline]
+WHERE type="PushEvent"
+AND PARSE_UTC_USEC(created_at) >= PARSE_UTC_USEC('2012-04-01 00:00:00')
+GROUP BY repository_name, repository_description, repository_url, repository_language
+ORDER BY pushes DESC
+LIMIT 6000
+
+=
+
+/* top 100 repos for Ruby by number of pushes */
+SELECT repository_name, count(repository_name) as pushes, repository_description, repository_url, repository_language
+FROM [githubarchive:github.timeline]
+WHERE type="PushEvent"
+AND repository_language="Ruby"
+AND PARSE_UTC_USEC(created_at) >= PARSE_UTC_USEC('2012-04-01 00:00:00')
+GROUP BY repository_name, repository_description, repository_url, repository_language
+ORDER BY pushes DESC
+LIMIT 100

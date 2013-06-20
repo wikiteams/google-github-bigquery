@@ -1,0 +1,6 @@
+SELECT COUNT(repository_language) as count_language, repository_language as language
+ FROM [githubarchive:github.timeline] 
+ WHERE (created_at CONTAINS "2013-06-19") 
+ GROUP BY language
+ ORDER BY count_language
+ DESC LIMIT 2000
